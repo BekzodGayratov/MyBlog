@@ -8,6 +8,6 @@ class MyBlogStandartPadding extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.symmetric(horizontal: context.width * 0.03),child: child,);
+        padding: EdgeInsets.symmetric(horizontal: context.width * 0.14),child: child,);
   }
 }
