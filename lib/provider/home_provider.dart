@@ -15,7 +15,7 @@ class HomeProvider extends ChangeNotifier {
   Future<void> getPosts() async {
     isLoading = true;
     notifyListeners();
-    await postService.getData().then((dynamic response) {
+    await postService.getLatestPosts().then((dynamic response) {
       if (response is List<PostModel>) {
         data = response;
         isLoading = false;

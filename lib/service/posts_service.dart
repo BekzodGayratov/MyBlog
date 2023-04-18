@@ -7,11 +7,10 @@ class PostService {
   Future<dynamic> postData() async {}
 
   // Get all data
-  Future<dynamic> getData() async {
-    await Future.delayed(Duration(seconds: 4));
+  Future<dynamic> getLatestPosts() async {
     try {
       Response response = await DioConfig.createRequest()
-          .get("http://192.168.100.5:3000/get_all_post");
+          .get("http://localhost:3000/get_latest_posts");
       if (response.statusCode == 200) {
         return (response.data as List)
             .map((e) => PostModel.fromJson(e))
