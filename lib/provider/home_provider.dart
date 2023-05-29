@@ -17,6 +17,7 @@ class HomeProvider extends ChangeNotifier {
     notifyListeners();
     await postService.getLatestPosts().then((dynamic response) {
       if (response is List<PostModel>) {
+        response[0].name.toString();
         data = response;
         isLoading = false;
         notifyListeners();
