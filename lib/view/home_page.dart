@@ -1,6 +1,7 @@
 import 'package:blog/core/extension/media_query_ext.dart';
 import 'package:blog/model/post_model.dart';
 import 'package:blog/provider/home_provider.dart';
+import 'package:blog/view/projects_page.dart';
 import 'package:blog/widgets/loading_widget.dart';
 import 'package:blog/widgets/standart_padding.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,12 @@ class _Scaffold extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProjectsPage()));
+                      },
                       style:
                           TextButton.styleFrom(foregroundColor: Colors.black),
                       child: const Text(
@@ -142,12 +148,43 @@ class _Scaffold extends StatelessWidget {
                             child: Text(homeProvider.error),
                           );
                         } else {
-                          List<PostModel> data = context.watch<HomeProvider>().data;
+                          List<PostModel> data =
+                              context.watch<HomeProvider>().data;
                           return ListView.builder(
-                            scrollDirection: Axis.horizontal,
+                              scrollDirection: Axis.horizontal,
                               itemBuilder: (context, index) {
-                            return Text("Hello");
-                          },itemCount: data.length);
+                                return Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: context.width * 0.02),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(data[index].name.toString()),
+                                      SizedBox(
+                                        height: context.height * 0.02,
+                                      ),
+                                      Expanded(
+                                        child: Container(
+                                          height: context.height * 0.5,
+                                          width: context.width * 0.3,
+                                          decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                  image: NetworkImage(
+                                                      data[index]
+                                                          .img
+                                                          .toString()),
+                                                  fit: BoxFit.cover),
+                                              color: Colors.transparent,
+                                              borderRadius:
+                                                  BorderRadius.circular(10.0)),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                );
+                              },
+                              itemCount: data.length);
                         }
                       })),
                 ],
